@@ -116,14 +116,13 @@
     	<tr>
     		<th>验证码：</th>		
     		<td><input id="f_vcode" name="verifyCode" size="6" class="TEXT" type="text">
-			<span><a href="javascript:_rvi()">换另外一个图</a></span>
+			<span><a href="javascript:;">换另外一个图</a></span>
 			</td>
     	</tr>
 		<tr>
     		<th>&nbsp;</th>		
 			<td>
-			<img id="img_vcode" alt="..." src="images/captcha.png" style="border: 2px solid rgb(204, 204, 204);" align="absmiddle">
-            <script language="javascript">function _rvi(){document.getElementById('img_vcode').src = '/action/user/captcha?t='+Math.random(1000);}</script>
+			<?php echo $img?>
 			</td>
 		</tr>
     	<tr class="buttons">
@@ -151,10 +150,9 @@
 </div>
 <script type="text/javascript">
 
-	
+
 	$(function(){
 		$('#btn-reg').on('click',function(){
-			console.log(11111);
 			var email=$('#f_email').val();
 			var name=$('#f_name').val();
 			var sex=$(':checked').val();
@@ -162,6 +160,7 @@
 			var pwd2=$('#f_pwd2').val();
 			var province=$('#userProvince').val();
 			var city=$('#userCity').val();
+			var code=$('#f_code').val();
 
 			$.get('user/add_user',{
 				email:email,
@@ -170,65 +169,27 @@
 				pwd:pwd,
 				pwd2:pwd2,
 				province:province,
-				city:city
+				city:city,
+				code:code
 			},function(data){
 				if(data=='pwd-error'){
 					$('#error_msg').html("两次密码不一致");
 					$('#error_msg').show("fast");
-				}else{
+				}else if(data=='code_error'){
+					$('#error_msg').html("验证码错误");
+					$('#error_msg').show("fast");
+				}
+				else
+				{
 					location.href='user/login';
 				}
 		},'text');
+
 	});
 	})
-
-
-//$('#frm_reg').ajaxForm({
-//    beforeSubmit: function(a,f,o) {
-//		if($('#f_email').val().length == 0){
-//			$('#f_email').focus();
-//			$('#error_msg').html("邮箱地址必须填写");
-//			$('#error_msg').show("fast");
-//			return false;
-//		}
-//		if($('#f_name').val().length == 0){
-//			$('#f_name').focus();
-//			$('#error_msg').html("姓名必须填写");
-//			$('#error_msg').show("fast");
-//			return false;
-//		}
-//		if($('#f_pwd').val().length == 0 || $('#f_pwd').val() != $('#f_pwd2').val()){
-//			$('#f_pwd').focus();
-//			$('#error_msg').html("两次密码必须填写，且要匹配");
-//			$('#error_msg').show("fast");
-//			return false;
-//		}
-//		var notify = $("input[name=gender]:checked").val();
-//		if(!notify){
-//			$('#tr_gender').addClass('hl');
-//			return false;
-//		}
-//		if($('#f_vcode').val().length == 0){
-//			$('#f_vcode').focus();
-//			$('#error_msg').html("验证码必须填写");
-//			$('#error_msg').show("fast");
-//			return false;
-//		}
-//    },
-//    success: function(html) {
-//    	if(html.length > 0){
-//    		$('#error_msg').hide();
-//    		$('#error_msg').html(html);
-//    		$('#error_msg').show("fast");
-//    	}else{
-////    		location.href="http://www.sysit.org/home/regok?email=" + $('#f_email').val();
-//    	}
-//    }
-//});
-//-->
-
-
-</script></div>
+</script>
+</div>
 	<div id="OSC_Footer">© 赛斯特(WWW.SYSIT.ORG)</div>
 </div>
-</body></html>
+</body>
+</html>
