@@ -154,7 +154,7 @@
 	$(function(){
 		$('#change-code').on('click',function(){
 			$.get('user/change_code',{},function(data){
-				$('#show-code'.html(data);)
+				$('#show-code').html(data);
 			},'text');
 		});
 		$('#btn-reg').on('click',function(){
@@ -186,7 +186,7 @@
 				}
 				else
 				{
-					location.href='user/login';
+					location.href='user/auto_login?email='+email;
 				}
 		},'text');
 
