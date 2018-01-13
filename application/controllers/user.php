@@ -28,8 +28,7 @@ class user extends CI_Controller {
         $this->load->view('login');
 
     }
-    public function reg()
-    {
+    public  function captcha(){
         $this->load->helper('captcha');
         $rand=rand(1000,9999);
         $this->session->set_userdata(array('captcha'=>$rand));
@@ -54,6 +53,15 @@ class user extends CI_Controller {
 
         $cap = create_captcha($vals);
         $img= $cap['image'];
+        return $img;
+    }
+    public function change_code(){
+    $img=$this->captcha();
+        echo $img;
+}
+    public function reg()
+    {
+        $img=$this->captcha();
         $this->load->view('reg',array('img'=>$img));
     }
     public function add_user(){
