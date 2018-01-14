@@ -18,7 +18,7 @@ class Article_model extends CI_Model
     public function get_article_type($user_id){
         $sql ="select * from
                  (select count(*) num,a.type_id
-                 from t_article a where a.user_id = 55
+                 from t_article a where a.user_id = 1
                 GROUP BY a.type_id) nt,
                 t_article_type t 
                 where t.type_id = nt.type_id";

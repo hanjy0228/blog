@@ -22,7 +22,7 @@ class User_model extends CI_Model{
     }
 
     public  function get_user_by_email($email){
-       $query= $this->db->get_where("t_user",array('id'=>$email));
+       $query= $this->db->get_where("t_user",array('email'=>$email));
         return $query->result();
     }
     public function update($id,$name){

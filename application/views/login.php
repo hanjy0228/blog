@@ -2,17 +2,15 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Content-Language" content="zh-CN">
-	<base href="<?php echo site_url(); ?>">
-  <title>登录 - SYSIT个人博客</title>
-    <link rel="stylesheet" href="assets/css/oschina2011.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="assets/css/thickbox.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="assets/css/osc-popupcss" type="text/css" media="screen">
-  <script type="text/javascript" src="assets/js/jquery-1.11.2js"></script>
-<!--  <script type="text/javascript" src="assets/js/jquery.js"></script>-->
-  <script type="text/javascript" src="assets/js/thickbox.js"></script>
-  <script type="text/javascript" src="assets/js/common.js"></script>
+	<base href="<?php echo site_url()?>">
+	<link rel="stylesheet" href="assets/css/oschina2011.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="assets/css/thickbox.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="assets/css/osc-popup.css" type="text/css" media="screen">
+	<script type="text/javascript" src="assets/js/jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="assets/js/thickbox.js"></script>
+	<script type="text/javascript" src="assets/js/common.js"></script>
   <style type="text/css">
-    body,table,input,textarea,select {font-family:Verdana,Simsun,sans-serif;}  
+    body,table,input,textarea,select {font-family:Verdana,Simsun,sans-serif;}
   </style>
 </head>
 <body>
@@ -34,7 +32,7 @@
 #OSChinaLoginTip ul li a:hover {border:1px solid #40AA53;background:#cfc;}
 </style>
 
-<div class="MainForm" id="login_page">	
+<div class="MainForm" id="login_page">
   <form id="frm_login" action="user/login" onsubmit="return false" method="POST" style="float:left; width:620px;">
     <h2>登录个人博客，如果尚未加入的请点击<a href="user/reg">注册新会员</a></h2>
     <div id="error_msg" class="error_msg" style="display:none;"></div>
@@ -81,7 +79,7 @@
 			email:email,
 			pwd:pwd
 		},function(data){
-			if(data == 'email not exist'){
+			if(data =='email not exist'){
 				$('#error_msg').html("邮箱不存在");
 				$('#error_msg').show();
 			}else if(data == 'password error'){

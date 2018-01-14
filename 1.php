@@ -2,212 +2,505 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="Content-Language" content="zh-CN">
-    <title>申请账号 - SYSIT个人博客</title>
-    <base href="<?php echo site_url()?>">
-    <link rel="stylesheet" href="assets/css/oschina2011.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="assets/css/thickbox.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="assets/css/osc-popup.css" type="text/css" media="screen">
+    <title>发表博客 Johnny的博客 - SYSIT个人博客</title>
+    <base href="<?php echo site_url() ?>">
+
+    <link rel="stylesheet" href="assets/css/space2011.css" type="text/css" media="screen">
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.css" media="screen">
     <script type="text/javascript" src="assets/js/jquery-1.11.2.js"></script>
-    <script type="text/javascript" src="assets/js/thickbox.js"></script>
-    <script type="text/javascript" src="assets/js/common.js"></script>
+    <script type="text/javascript" src="assets/js/oschina.js"></script>
     <style type="text/css">
-        body,table,input,textarea,select {font-family:Verdana,Simsun,sans-serif;}
+        body,table,input,textarea,select {font-family:Verdana,sans-serif,宋体;}
     </style>
 </head>
 <body>
-<div id="OSC_Screen">
-    <div id="OSC_Content" class="CenterDiv"><style>
-            #OSC_Footer {border:0;}
-            .MainForm tr.hl th {border:1px solid #C00;border-right:0;background:#FEE;}
-            .MainForm tr.hl td {border:1px solid #C00;border-left:0;background:#FEE;}
-            .MainForm td .nodisp {display:none;padding-left:20px;}
-            .MainForm tr.hl td .nodisp {display:inline;color:#C00;font-size:11pt;}
-            #OSChinaLoginTip {font-size:10.5pt;padding:0 0 20px 10px;color:#060;}
-            #OSChinaLoginTip ul {margin:10px 0 0 0;}
-            #OSChinaLoginTip ul li {float:left; width:90px;margin-right:30px;}
-            #OSChinaLoginTip ul li#openid_gmail img {margin-top:8px;}
-            #OSChinaLoginTip ul li#openid_yahoo img {margin-top:15px;}
-            #OSChinaLoginTip ul li#openid_msn img {}
-            #OSChinaLoginTip ul li a {display:block;height:40px;}
-            #OSChinaLoginTip ul li a {border:1px solid #fff;padding:2px;}
-            #OSChinaLoginTip ul li a:hover {border:1px solid #40AA53;background:#cfc;}
-        </style>
-
-        <div class="MainForm" id="reg_page">
-            <form id="frm_reg" action="user/add_user" onsubmit="return false;" method="POST" style="float:left; width:620px;">
-                <h2>申请<span style="color: #006600;"> SYSIT Blog</span> 账号，已经申请的请点击<a href="user/login">这里</a>登录</h2>
-                <div id="error_msg" class="error_msg" style="display:none"></div>
-                <table cellpadding="0" cellspacing="0">
-                    <tbody><tr id="tr_email">
-                        <th nowrap="nowrap">电子邮箱：</th>
-                        <td>
-                            <input name="email" id="f_email" class="TEXT" style="width: 200px;" type="text">
-                            <span id="email_tip" class="nodisp"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>姓名：</th>
-                        <td><input name="name" id="f_name" maxlength="20" class="TEXT" style="width: 150px;" type="text">
-                            <span id="name_msg">不能超过10个字</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>登录密码：</th>
-                        <td><input name="pwd" id="f_pwd" class="TEXT" style="width: 150px;" type="password">
-                            <span id="password_msg">至少四位</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>密码确认：</th>
-                        <td><input name="pwd2" id="f_pwd2" class="TEXT" style="width: 150px;" type="password"></td>
-                    </tr>
-                    <tr id="tr_gender">
-                        <th>性别：</th>
-                        <td>
-                            <input name="gender" value="1" id="gender_1" type="radio"><label for="gender_1">男</label>&nbsp;&nbsp;&nbsp;
-                            <input name="gender" value="2" id="gender_2" type="radio"><label for="gender_2">女</label>
-                            <span class="nodisp">请选择性别</span>
-                        </td>
-                    </tr>
-                    <tr id="tr_area">
-                        <th>居住地区：</th>
-                        <td><select onchange="showcity(this.value, document.getElementById('userCity'));" name="province" id="userProvince">
-                                <option selected="selected" value="">--请选择省份--</option>
-                                <option value="北京">北京</option>
-                                <option value="上海">上海</option>
-                                <option value="广东">广东</option>
-                                <option value="江苏">江苏</option>
-                                <option value="浙江">浙江</option>
-                                <option value="重庆">重庆</option>
-                                <option value="安徽">安徽</option>
-                                <option value="福建">福建</option>
-                                <option value="甘肃">甘肃</option>
-                                <option value="广西">广西</option>
-                                <option value="贵州">贵州</option>
-                                <option value="海南">海南</option>
-                                <option value="河北">河北</option>
-                                <option value="黑龙江">黑龙江</option>
-                                <option value="河南">河南</option>
-                                <option value="湖北">湖北</option>
-                                <option value="湖南">湖南</option>
-                                <option value="江西">江西</option>
-                                <option value="吉林">吉林</option>
-                                <option value="辽宁">辽宁</option>
-                                <option value="内蒙古">内蒙古</option>
-                                <option value="宁夏">宁夏</option>
-                                <option value="青海">青海</option>
-                                <option value="山东">山东</option>
-                                <option value="山西">山西</option>
-                                <option value="陕西">陕西</option>
-                                <option value="四川">四川</option>
-                                <option value="天津">天津</option>
-                                <option value="新疆">新疆</option>
-                                <option value="西藏">西藏</option>
-                                <option value="云南">云南</option>
-                                <option value="香港">香港特别行政区</option>
-                                <option value="澳门">澳门特别行政区</option>
-                                <option value="台湾">台湾</option>
-                                <option value="海外">海外</option>
-                            </select>
-                            <select name="city" id="userCity"></select>
-                            <script src="images/getcity.js"></script><span class="nodisp">请选择您所在的地区</span></td>
-                    </tr>
-                    <tr>
-                        <th>验证码：</th>
-                        <td><input id="f_vcode" name="verifyCode" size="6" class="TEXT" type="text">
-                            <span><a href="javascript:;" id="change-code">换另外一个图</a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <td id="show-code">
-                            <?php echo $img?>
-                        </td>
-                    </tr>
-                    <tr class="buttons">
-                        <th>&nbsp;</th>
-                        <td style="padding: 20px 0pt;">
-                            <input value=" 注册新用户" id='btn-reg' class="BUTTON SUBMIT" type="submit">
-                        </td>
-                    </tr>
-                    </tbody></table>
-            </form>
-            <div id="reg_tip" class="tipbox" style="float:right;width:300px;">
-                <h3>为什么要注册？</h3>
-                <ol>
-                    <li>发布博客</li>
-                    <li>参与博客的讨论和评论</li>
-                    <li>认识更多朋友</li>
-                </ol>
-                <h3 style="margin-top:20px;">为什么总提示验证码错误？</h3>
-                <ol>
-                    <li>首先请确定浏览器已经启用Cookie</li>
-                    <li>实在不行，邮件给我们 admin@sysit.org</li>
-                </ol>
-            </div>
-            <div class="clear"></div>
+<!--[if IE 8]>
+<style>ul.tabnav {padding: 3px 10px 3px 10px;}</style>
+<![endif]-->
+<!--[if IE 9]>
+<style>ul.tabnav {padding: 3px 10px 4px 10px;}</style>
+<![endif]-->
+<div id="OSC_Screen"><!-- #BeginLibraryItem "/Library/OSC_Banner.lbi" -->
+    <div id="OSC_Banner">
+        <div id="OSC_Slogon"><?php $user = $this->session->userdata('user');
+            if(isset($user)){
+                echo $user->username."'s Blog";
+            }?></div>
+        <div id="OSC_Channels">
+            <ul>
+                <li><a href="#" class="project"><?php if(isset($user)){echo $user->mood;}?></a></li>
+            </ul>
         </div>
-        <script type="text/javascript">
-            $(function(){
+        <div class="clear"></div>
+    </div>
+    <!-- #EndLibraryItem -->
+    <div id="OSC_Topbar">
+        <div id="VisitorInfo">
+            当前访客身份：
+            <?php
+            if(isset($user)){
+                echo $user->username;
+                ?>
+                <a href='user/logout'>退出</a>
+            <?php }else{?>
+                游客 [ <a href="user/login">登录</a> | <a href="user/reg">注册</a> ]
+            <?php }?>
+            <span id="OSC_Notification">
+			<a href="inbox.htm" class="msgbox" title="进入我的留言箱">你有<em>0</em>新留言</a>
+					</span>
+        </div>
+        <div id="SearchBar">
+            <form action="Search">
+                <input name="user" value="154693" type="hidden">
+                <input id="txt_q" name="q" class="SERACH" value="在此空间的博客中搜索" onblur="(this.value=='')?this.value='在此空间的博客中搜索':this.value" onfocus="if(this.value=='在此空间的博客中搜索'){this.value='';};this.select();" type="text">
+                <input class="SUBMIT" value="搜索" type="submit">
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="OSC_Content">
+        <div id="AdminScreen">
+            <div id="AdminPath">
+                <a href="index_logined.htm">返回我的首页</a>&nbsp;»
+                <span id="AdminTitle">发表博客</span>
+            </div>
+            <div id="AdminMenu"><ul>
+                    <li class="caption">个人信息管理
+                        <ol>
+                            <li><a href="inbox.htm">站内留言(0/1)</a></li>
+                            <li><a href="profile.htm">编辑个人资料</a></li>
+                            <li><a href="chpwd.htm">修改登录密码</a></li>
+                            <li><a href="userSettings.htm">网页个性设置</a></li>
+                        </ol>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="caption">博客管理
+                        <ol>
+                            <li class="current"><a href="newBlog.htm">发表博客</a></li>
+                            <li><a href="blogCatalogs.htm">博客设置/分类管理</a></li>
+                            <li><a href="blogs.htm">文章管理</a></li>
+                            <li><a href="blogComments.htm">博客评论管理</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+            <div id="AdminContent">
+                <div class="MainForm">
+                    <form id="BlogForm" action="/action/blog/save?user=${g_user.id}" method="POST">
+                        <input id="hdn_blog_id" name="draft" value="0" type="hidden">
+                        <table>
+                            <tbody><tr><td class="t">标题（必填）</td></tr>
+                            <tr>
+                                <td>
+                                    <input name="title" id="f_title" class="TEXT" style="width: 400px;" type="text">
+                                    存放于
+                                    <select name="catalog">
+                                        <?php foreach ($types as $type){?>
+                                            <option selected="selected" value="<?php echo $type->type_id?>"><?php echo $type->type_name?></option>
+                                        <?php }?>
+                                    </select>
+                                    <a href="blogCatalogs.htm" onclick="return confirm('是否放弃当前编辑进入分类管理？');">分类管理»</a>
+                                </td>
+                            </tr>
+                            <tr><td class='t'>内容（必填）
+                                    <span id='save_draft_msg' style='display:none;color:#666;'></span>
 
-                $('#change-code').on('click',function(){
-                    $.get('user/change_code',{},function(data){
-                        $('#show-code').html(data);
-                    },'text');
-                });
+                                </td></tr>
 
-                $('#f_email').on('blur',function(){
-                    var email = $(this).val();
-//		console.log(email);
-                    $.get('user/check_email',{
-                        email:email
-                    },function(data){
-                        if(data == '1'){
-                            $('#error_msg').html("邮箱已存在").show("fast");
-                        }else{
-                            $('#error_msg').hide("fast");
+                            <tr>
+
+                                <td><textarea name="content" id="ta_blog_content" style="width:750px;height:300px;"></textarea></td>
+                            </tr>
+                            <tr class="option">
+                                <td><strong>文章类型？</strong>
+                                    <input id="blog_type_1" name="type" value="1" onclick="switch_src(this)" checked="checked" type="radio"> <label for="blog_type_1">原创&nbsp;</label>
+                                    <input id="blog_type_4" name="type" value="4" onclick="switch_src(this)" type="radio"> <label for="blog_type_1">转贴&nbsp;</label>
+	<span id="f_origin_url" style="display:none">
+		<strong>原文链接: </strong><input id="t_origin_url" name="origin_url" class="TEXT" size="50" type="text">
+	</span>
+                                </td>
+                            </tr>
+                            <tr class="option">
+                                <td><strong>隐私设置？</strong>
+                                    <input id="privacy_1" name="privacy" value="0" checked="checked" type="radio"> <label for="privacy_1">所有人可见&nbsp;</label>
+                                    <input id="privacy_0" name="privacy" value="1" type="radio"> <label for="privacy_0">保密（只有本人可见）</label>
+                                    <span class="tip">设置为保密的文章，标题对任何人是可见的</span>
+                                </td>
+                            </tr>
+                            <tr class="option">
+                                <td><strong>评论设置？	</strong>
+                                    <input id="can_comment_1" name="deny_comment" value="0" checked="checked" type="radio"> <label for="can_comment_1">允许评论&nbsp;</label>
+                                    <input id="can_comment_0" name="deny_comment" value="1" type="radio"> <label for="can_comment_0">禁止评论</label>
+                                </td>
+                            </tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr class="submit">
+                                <td>
+                                    <input value=" 发 表 " class="BUTTON SUBMIT" type="submit">
+                                    <input name="as_top" value="1" type="checkbox">
+                                    设置为置顶
+                                    <span id="ajax_processing" style="margin-left:10px;">正在提交，请稍候...</span>
+                                    <span id="submit_msg" style="display:none;"></span>
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </form>
+                </div>
+                <script type='text/javascript' src='assets/kindeditor/kindeditor-min.js' charset='utf-8'></script>
+
+                <style>
+
+                    .ke-icon-code {
+
+                        background-image: url(/img/code.gif);
+
+                        background-position: 0px 0px;
+
+                        width: 16px;
+
+                        height: 16px;
+
+                    }
+
+                </style>
+
+                <script type='text/javascript'>
+
+                    <!--
+
+                    $(document).ready(function(){
+
+                        KE.lang['code'] = "插入程序代码或脚本";
+
+                        KE.plugin['code'] = {
+
+                            click : function(id) {
+
+                                KE.util.selection(id);
+
+                                var dialog = new KE.dialog({
+
+                                    id : id,
+
+                                    cmd : 'code',
+
+                                    file : 'code/insert_code.html',
+
+                                    width : 530,
+
+                                    height : 300,
+
+                                    title : KE.lang['code'],
+
+                                    yesButton : KE.lang['yes'],
+
+                                    noButton : KE.lang['no']
+
+                                });
+
+                                dialog.show();
+
+                            },
+
+                            check : function(id) {
+
+                                var dialogDoc = KE.util.getIframeDoc(KE.g[id].dialog);
+
+                                var lang = KE.$('ic_lang', dialogDoc).value;
+
+                                var source = KE.$('ic_source', dialogDoc).value;
+
+                                if(lang == ''){
+
+                                    alert('编程语言必须选择');
+
+                                    return false;
+
+                                }
+
+                                if(source == ''){
+
+                                    alert('请输入程序代码或者脚本');
+
+                                    return false;
+
+                                }
+
+                                return true;
+
+                            },
+
+                            exec : function(id) {
+
+                                KE.util.select(id);
+
+                                var iframeDoc = KE.g[id].iframeDoc;
+
+                                var dialogDoc = KE.util.getIframeDoc(KE.g[id].dialog);
+
+                                if (!this.check(id)) return false;
+
+                                var lang = KE.$('ic_lang', dialogDoc).value;
+
+                                var source = KE.$('ic_source', dialogDoc).value;
+
+                                this.insert(id, lang, source);
+
+                            },
+
+                            insert : function(id, lang,source) {
+
+                                var html = '<pre class="brush:' + lang + '; toolbar: true; auto-links: false;">';
+
+                                html += html_encode(source);
+
+                                html += '</pre>';
+
+                                KE.util.insertHtml(id, html);
+
+                                KE.layout.hide(id);
+
+                                KE.util.focus(id);
+
+                            }
+
+                        };
+
+                    });
+
+                    //-->
+
+                </script>
+
+                <script type='text/javascript'>
+
+                    <!--
+
+                    $(document).ready(function(){
+
+                        KE.show({
+
+                            id : 'ta_blog_content',
+
+                            resizeMode : 1,
+
+                            shadowMode : false,
+
+                            allowPreviewEmoticons : false,
+
+                            allowUpload : true,
+
+                            syncType : 'auto',
+
+                            urlType : 'domain',
+
+                            cssPath : 'css/ke-oschina.css',
+
+                            imageUploadJson : '/action/blog/upload_img',
+
+                            items : [ 'bold', 'italic', 'underline', 'strikethrough', 'removeformat','|','textcolor', 'bgcolor',
+
+                                'title', 'fontname', 'fontsize',  '|',
+
+                                'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|',
+
+                                'code', 'image', 'flash', 'emoticons', 'link', 'unlink','|','selectall','source' ,'about'
+
+                            ]
+
+                        });
+
+                    });
+
+                    //-->
+
+                </script>
+
+                <script type='text/javascript'>
+
+                    <!--
+
+                    $(document).ready(function(){
+
+                        $('#BlogForm').ajaxForm({
+
+                            dataType: 'json',
+
+                            beforeSerialize: function($form, options) {
+
+                                KE.sync('ta_blog_content');
+
+                            },
+
+                            success: function(json) {
+
+                                if(json.msg){
+
+                                    $('#submit_msg').hide();
+
+                                    $('#submit_msg').html("<span class='error_msg'>"+json.msg+"</span>");
+
+                                    $('#submit_msg').show();
+
+                                }
+
+                                else if(json.id){
+
+                                    location.href = "index.htm";
+
+                                }
+
+                                else if(json.draft){
+
+                                    location.href = "index.htm";
+
+                                }
+
+                            }
+
+                        });
+
+                        $("#BlogForm").ajaxStart(function(){
+
+                            $('#submit_msg').hide();
+
+                            $('#ajax_processing').show();
+
+                        });
+
+                        $("#BlogForm").ajaxComplete(function(event,request, settings){
+
+                            $('#ajax_processing').hide();
+
+                        });
+
+                    });
+
+                    function save_to_draft(){
+
+                        var form = $('#BlogForm').formSerialize();
+
+                        ajax_post("/action/blog/save?save_as_draft=1",form,function(html){
+
+                            var json = eval('(' + html + ')');
+
+                            if(json.msg)
+
+                                alert(json.msg);
+
+                            else if(json.draft){
+
+                                $('#hdn_blog_id').val(json.draft);
+
+                                $('#save_draft_msg').hide();
+
+                                $('#save_draft_msg').text("已保存到草稿箱，编号为#" + json.draft);
+
+                                $('#save_draft_msg').fadeIn();
+
+                            }
+
+                        });
+
+                    }
+
+                    function switch_src(rd){
+
+                        if(rd.value=='4' && rd.checked){
+
+                            $('#f_origin_url').show();
+
+                            $('#t_origin_url').focus();
+
                         }
-                    },'text');
 
-                });
+                        else
 
+                            $('#f_origin_url').hide();
 
+                    }
 
+                    //-->
 
-                $('#btn-reg').on('click',function(){
-                    var email = $('#f_email').val();
-                    var name = $('#f_name').val();
-                    var sex = $(':checked').val();
-                    var pwd = $('#f_pwd').val();
-                    var pwd2 = $('#f_pwd2').val();
-                    var province = $('#userProvince').val();
-                    var city = $('#userCity').val();
-                    var code = $('#f_vcode').val();
-                    $.get('user/add_user',{
-                        email:email,
-                        name:name,
-                        gender:sex,
-                        pwd:pwd,
-                        pwd2:pwd2,
-                        province:province,
-                        city:city,
-                        code:code
-                    },function(data){
-                        if(data == 'pwd-error'){
-                            $('#error_msg').html("两次密码不一致");
-                            $('#error_msg').show("fast");
-                        }else if(data == 'code-error'){
-                            $('#error_msg').html("验证码不对");
-                            $('#error_msg').show("fast");
-                        }else{
-                            location.href = 'user/auto_login?email='+email;
-                        }
+                </script></div>
 
-                    },'text');
-                });
+            <div class='clear'></div>
 
-            })
-        </script></div>
-    <div id="OSC_Footer">© 赛斯特(WWW.SYSIT.ORG)</div>
-</div>
+        </div>
+
+        <script type='text/javascript'>
+
+            <!--
+
+            $(document).ready(function() {
+
+                $('#AdminTitle').text('发表博客');
+
+            });
+
+            $('.AutoCommitForm').ajaxForm({
+
+                success: function(html) {
+
+                    $('#error_msg').hide();
+
+                    if(html.length>0)
+
+                        $('#error_msg').html("<span class='error_msg'>"+html+"</span>");
+
+                    else
+
+                        $('#error_msg').html("<span class='ok_msg'>操作已成功完成</span>")
+
+                    $('#error_msg').show("fast");
+
+                }
+
+            });
+
+            $('.AutoCommitJSONForm').ajaxForm({
+
+                dataType: 'json',
+
+                success: function(json) {
+
+                    $('#error_msg').hide();
+
+                    if(json.error==0){
+
+                        if(json.msg)
+
+                            $('#error_msg').html("<span class='ok_msg'>"+json.msg+"</span>");
+
+                        else
+
+                            $('#error_msg').html("<span class='ok_msg'>操作已成功完成</span>");
+
+                    }
+
+                    else {
+
+                        if(json.msg)
+
+                            $('#error_msg').html("<span class='error_msg'>"+json.msg+"</span>");
+
+                        else
+
+                            $('#error_msg').html("<span class='error_msg'>操作已成功完成</span>");
+
+                    }
+
+                    $('#error_msg').show("fast");
+
+                }
+
+            });
+
+            //-->
+
+        </script>
+        <div class="clear"></div>
+        <div id="OSC_Footer">© 赛斯特(WWW.SYSIT.ORG)</div>
+    </div>
 </body></html>

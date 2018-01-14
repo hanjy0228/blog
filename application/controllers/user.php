@@ -99,6 +99,7 @@ class user extends CI_Controller {
         }
     }
     public function auto_login(){
+        $email=$this->input->get('email');
         $result = $this->User_model->get_user_by_email($email);
         $this->session->set_userdata(array(
             'user'=>$result[0]
