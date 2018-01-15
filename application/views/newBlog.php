@@ -78,7 +78,7 @@
 	<li class="caption">博客管理
 		<ol>
 			<li class="current"><a href="newBlog.htm">发表博客</a></li>
-			<li><a href="blogCatalogs.htm">博客设置/分类管理</a></li>
+			<li><a href="welcome/blog_catalog">博客设置/分类管理</a></li>
 			<li><a href="blogs.htm">文章管理</a></li>
 			<li><a href="blogComments.htm">博客评论管理</a></li>
 		</ol>
@@ -100,7 +100,7 @@
 			<option selected="selected" value="<?php echo $type->type_id?>"><?php echo $type->type_name?></option>
 		<?php }?>
 		</select>
-	<a href="blogCatalogs.htm" onclick="return confirm('是否放弃当前编辑进入分类管理？');">分类管理»</a>
+	<a href="blogCatalogs.php" onclick="return confirm('是否放弃当前编辑进入分类管理？');">分类管理»</a>
 	</td>
   </tr>
   <tr><td class='t'>内容（必填）

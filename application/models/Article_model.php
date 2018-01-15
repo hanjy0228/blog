@@ -51,13 +51,16 @@ class Article_model extends CI_Model
 
     }
     public function get_own_article_type($user_id){
-        $sql ="select * from
-                 (select count(*) num,a.type_id
-                 from t_article a where a.user_id = $user_id
-                GROUP BY a.type_id) nt,
-                t_article_type t
-                where t.type_id = nt.type_id
-               ";
+//        $sql ="select * from
+//                 (select count(*) num,a.type_id
+//                 from t_article a where a.user_id = $user_id
+//                GROUP BY a.type_id) nt,
+//                t_article_type t
+//                where t.type_id = nt.type_id
+//               ";
+        $sql="select *,
+(select count(*) from t_article a where a.type_id=t.type_id) num
+from t_article_type t where t.user_id=$user_id";
 
         $query = $this->db->query($sql);
         return $query->result();
@@ -71,4 +74,30 @@ class Article_model extends CI_Model
         $this->db->insert('t_article',$article);
         return $this->db->affected_rows();
     }
+    public function add_type($name,$user_id){
+
+        $this->db->insert('t_article_type',array(
+            'type_name'=>$name,
+            'user_id'=>$user_id
+        ));
+        return $this->db->affected_rows();
+    }
+    public function edit_type($name,$type_id){
+        $this->db->where('type_id',$type_id);
+        $this->db->update('t_article_type',array(
+            'type_name'=>$name,
+        ));
+        return $this->db->affected_rows();
+    }
+    public function del_type($type_id){
+        $this->db->delete('t_article_type', array('type_id' => $type_id));
+        return $this->db->affected_rows();
+    }
+    public function get_type_id_userid($user_id,$type_id){
+        $query=$this->db->get_where('t_article_type',array(
+            'user_id'=>$user_id,
+            'type_id'=>$type_id
+        ));
+        return $query->result();
+}
 }

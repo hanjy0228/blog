@@ -2,13 +2,12 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Content-Language" content="zh-CN">
-  <title>Johnny的博客 - SYSIT个人博客</title>
-	<base href="<?php echo site_url()?>">
+  <title>博客文章管理 Johnny的博客 - SYSIT个人博客</title>
+	<base href="<?php echo site_url() ?>">
+
 	<link rel="stylesheet" href="assets/css/space2011.css" type="text/css" media="screen">
 	<link rel="stylesheet" type="text/css" href="assets/css/jquery.css" media="screen">
-	<script type="text/javascript" src="assets/js/jquery-1.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.js"></script>
-	<script type="text/javascript" src="assets/js/jquery_002.js"></script>
+	<script type="text/javascript" src="assets/js/jquery-1.11.2.js"></script>
 	<script type="text/javascript" src="assets/js/oschina.js"></script>
   <style type="text/css">
     body,table,input,textarea,select {font-family:Verdana,sans-serif,宋体;}	
@@ -31,8 +30,8 @@
 		<ul>
 			<li><a href="#" class="project"><?php if(isset($user)){echo $user->mood;}?></a></li>
 		</ul>
-    </div>
-    <div class="clear"></div>
+	</div>
+	<div class="clear"></div>
 </div><!-- #EndLibraryItem --><div id="OSC_Topbar">
 		<div id="VisitorInfo">
 			当前访客身份：
@@ -61,7 +60,7 @@
 <div id="AdminScreen">
     <div id="AdminPath">
         <a href="index_logined.htm">返回我的首页</a>&nbsp;»
-    	<span id="AdminTitle">管理首页</span>
+    	<span id="AdminTitle">博客文章管理</span>
     </div>
     <div id="AdminMenu"><ul>
 	<li class="caption">个人信息管理		
@@ -76,22 +75,78 @@
 <ul>
 	<li class="caption">博客管理	
 		<ol>
-			<li><a href="welcome/newBlog">发表博客</a></li>
-			<li><a href="welcome/blog_catalog">博客设置/分类管理</a></li>
-			<li><a href="blogs.htm">文章管理</a></li>
+			<li><a href="newBlog.htm">发表博客</a></li>
+			<li><a href="blogCatalogs.htm">博客设置/分类管理</a></li>
+			<li class="current"><a href="blogs.htm">文章管理</a></li>
 			<li><a href="blogComments.htm">博客评论管理</a></li>
 		</ol>
 	</li>
 </ul>
 </div>
     <div id="AdminContent">
-<p style="margin-top:150px;text-align:center;color:#666;">欢迎来到个人空间管理页面，请从左边菜单中选择</p></div>
+<div class="MainForm BlogArticleManage">
+  <h3 class="title">共有 3 篇博客，每页显示 40 个，共 1 页</h3>
+    <div id="BlogOpts">
+	<a href="javascript:;" onclick="select_all();">全选</a>&nbsp;|
+	<a href="javascript:;" onclick="unselect_all();">取消</a>&nbsp;|
+	<a href="javascript:;" onclick="select_other();">反向选择</a>&nbsp;|
+	<a href="javascript:;" onclick="delete_sel()">删除选中</a>
+  </div>
+  <ul>
+		<li class="row_1">
+		<input name="blog" value="24027" type="checkbox">
+		<a href="viewPost_comment.htm" target="_blank">测试文章3</a>
+		<small>2011-06-18 00:34</small>
+	</li>
+		<li class="row_0">
+		<input name="blog" value="24026" type="checkbox">
+		<a href="viewPost_logined.htm" target="_blank">测试文章2</a>
+		<small>2011-06-17 23:06</small>
+	</li>
+		<li class="row_1">
+		<input name="blog" value="24025" type="checkbox">
+		<a href="viewPost.htm" target="_blank">测试文章1</a>
+		<small>2011-06-17 23:04</small>
+	</li>
+	  </ul>
+    </div>
+<script type="text/javascript">
+<!--
+function select_all(){
+	$("input[name='blog']").attr("checked", true);
+}
+function unselect_all(){
+	$("input[name='blog']").attr("checked", false); 
+}
+function select_other(){
+	jQuery.each($("input[name='blog']"), function(i, n){
+		n.checked = !n.checked;
+	}); 
+}
+function delete_sel(){
+	var blogids = "";
+	jQuery.each($("input[name='blog']"), function(i, n){
+		if(n.checked){
+			blogids += $(this).val()+",";
+		}
+	});
+	if(blogids.length > 0){
+		if(!confirm("确认要删除选中的文章吗？")) return ;
+		ajax_post("/action/blog/batch_delete","id="+blogids,function(html){
+			location.reload();
+		});
+	}
+	else
+		alert("请选择要删除的文章");
+}
+//-->
+</script></div>
 	<div class="clear"></div>
 </div>
 <script type="text/javascript">
 <!--
 $(document).ready(function() {
-	$('#AdminTitle').text('管理首页');
+	$('#AdminTitle').text('博客文章管理');
 });
 $('.AutoCommitForm').ajaxForm({
     success: function(html) {	
@@ -128,7 +183,7 @@ $('.AutoCommitJSONForm').ajaxForm({
 	<div class="clear"></div>
 	<div id="OSC_Footer">© 赛斯特(WWW.SYSIT.ORG)</div>
 </div>
-<script type="text/javascript" src="assets/js/space.htm" defer="defer"></script>
+<script type="text/javascript" src="js/space.htm" defer="defer"></script>
 <script type="text/javascript">
 <!--
 $(document).ready(function() {

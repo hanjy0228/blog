@@ -77,4 +77,45 @@ class Welcome extends CI_Controller {
 			redirect('welcome/index_logined');
 		}
 	}
+	public function blog_catalog(){
+		$user = $this->session->userdata('user');
+		$types = $this->Article_model->get_own_article_type($user->user_id);
+
+
+		$this->load->view('blogCatalogs',array('types'=>$types));
+
+	}
+	public function add_type( ){
+		$name=$this->input->get('name');
+		$user = $this->session->userdata('user');
+		$rows=$this->Article_model->add_type($name,$user->user_id);
+		if($rows>0){
+			echo 'success';
+		}
+	}
+	public function edit_type( ){
+		$name=$this->input->get('name');
+		$type_id=$this->input->get('typeId');
+
+		$rows=$this->Article_model->edit_type($name,$type_id);
+		if($rows>0){
+			echo 'success';
+		}
+	}
+	public function del_type( ){
+		$type_id=$this->input->get('typeId');
+		$user=$this->session->userdata('user');
+		$result=$this->Article_model->get_type_id_userid($user->user_id,$type_id);
+		if(count($result)==0){
+			echo 'fail';
+		}else{
+			$rows=$this->Article_model->del_type($type_id);
+			if($rows>0){
+				echo 'success';
+			}
+		}
+	}
+	public function blog_comments(){
+
+}
 }

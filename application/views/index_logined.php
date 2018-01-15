@@ -103,7 +103,7 @@
   <strong>博客管理</strong>
   <ul class="LinkLine">
 	<li><a href="welcome/newBlog">发表博客</a></li>
-			<li><a href="blogCatalogs.htm">博客分类管理</a></li>
+			<li><a href="welcome/editCatalog">博客分类管理</a></li>
 	<li><a href="blogs.htm">文章管理</a></li>
 	<li><a href="blogComments.htm">网友评论管理</a></li>
   </ul>
