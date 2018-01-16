@@ -14,7 +14,7 @@ class Welcome extends CI_Controller {
 		$this->load->library('pagination');
 		$user=$this->session->userdata('user');
 
-		$total=$this->Article_model->get_own_count_article($user->user_id);
+		$total=$this->Article_model->get_own_count_article();
 		$config['base_url'] = base_url().'welcome/index_logined';
 		$config['total_rows'] = $total;
 		$config['per_page'] = 2;
@@ -22,14 +22,14 @@ class Welcome extends CI_Controller {
 		$this->pagination->initialize($config);
 
 		$links= $this->pagination->create_links();
-		$results = $this->Article_model->get_own_article_list($this->uri->segment(3),$config['per_page'],$user->user_id);
+		$results = $this->Article_model->get_own_article_list($this->uri->segment(3),$config['per_page']);
 
 
 
 
 
 //		$user = $this->session->userdata('user');
-		$types = $this->Article_model->get_own_article_type($user->user_id);
+		$types = $this->Article_model->get_own_article_type();
 
 		$this->load->view('index_logined',array('list'=>$results,'types'=>$types,'links'=>$links));
 	}
@@ -115,7 +115,76 @@ class Welcome extends CI_Controller {
 			}
 		}
 	}
-	public function blog_comments(){
+	public function blogs(){
+		$user=$this->session->userdata('user');
+		$result=$this->Article_model->get_blogs_by_user($user->user_id);
+		$this->load->view('blogs',array('result'=>$result));
+	}
+	public function del_article(){
+		$ids=$this->input->get('ids');
+		$rows=$this->Article_model->del_article_by_id($ids);
+		if($rows>0){
+			echo'success';
+		}
+	}
+	public function blog_detail(){
+		$id=$this->input->get('id');
+		$row=$this->Article_model->get_article_by_id($id);
+		$date_str=$this->time_tran($row->post_date);
+		$row->post_date=$date_str;
+		$comments=$this->Article_model->get_comment_by_article_id($id);
 
-}
+		$result=$this->Article_model->get_article_list_all();
+		$prev_article=null;
+		$next_article=null;
+		foreach($result as $index=>$article){
+			if($article->article_id==$id){
+				if($index>0){
+					$prev_article=$result[$index-1];
+				}
+				if($index<count($result)-1)
+				{
+					$next_article=$result[$index+1];
+				}
+			}
+		}
+
+		$this->load->view('viewPost_comment',array(
+				'article'=>$row,
+				'comments'=>$comments,
+				'next'=>$next_article,
+				'prev'=>$prev_article
+				));
+	}
+	function time_tran($the_time)
+	{
+		$now_time = date("Y-m-d H:i:s", time() + 8 * 60 * 60);
+		$now_time = strtotime($now_time);
+		$show_time = strtotime($the_time);
+		$dur = $now_time - $show_time;
+		if ($dur < 0) {
+			return $the_time;
+		} else {
+			if ($dur < 60) {
+				return $dur . '秒前';
+			} else {
+				if ($dur < 3600) {
+					return floor($dur / 60) . '分钟前';
+				} else {
+					if ($dur < 86400) {
+						return floor($dur / 3600) . '小时前';
+					} else {
+						if ($dur < 259200) {//3天内
+							return floor($dur / 86400) . '天前';
+						} else {
+							return $the_time;
+						}
+					}
+				}
+			}
+		}
+	}
+	public function blog_comments(){
+		$this->load->view('blogComments');
+	}
 }
