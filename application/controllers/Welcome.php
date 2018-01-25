@@ -183,8 +183,13 @@ class Welcome extends CI_Controller {
 				}
 			}
 		}
+		
 	}
 	public function blog_comments(){
-		$this->load->view('blogComments');
+		$user=$this->session->userdata('user');
+		$result=$this->Article_model->blog_comments($user->user_id);
+		$this->load->view('blogComments',array(
+			'result'=>$result
+		));
 	}
 }

@@ -121,4 +121,14 @@ class Article_model extends CI_Model
     public function get_article_list_all(){
         return $this->db->get('t_article')->result();
     }
+    public function blog_comments($user_id){
+        $sql="select *
+        from t_user u,
+        t_article a,
+        t_comment c
+        where c.user_id=u.user_id
+        and c.article_id=a.article_id
+        and a.user_id=$user_id";
+        return $this->db->query($sql)->result();
+    }
 }

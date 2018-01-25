@@ -91,43 +91,7 @@
 						location.href = 'welcome/index_logined';
 					}
 				},'text')
-
-
 			})
-
-
-
-
-
-
-
-			//<!--
-			//$('#f_email').focus();$('#frm_login').ajaxForm({
-			//    beforeSubmit: function(a,f,o) {
-			//		if($('#f_email').val().length == 0){
-			//			$('#f_email').focus();
-			//			$('#error_msg').html("请输入登录的邮箱或者帐号");
-			//			$('#error_msg').show();
-			//			return false;
-			//		}
-			//		if($('#f_pwd').val().length == 0){
-			//			$('#f_pwd').focus();
-			//			$('#error_msg').html("请输入登录密码");
-			//			$('#error_msg').show();
-			//			return false;
-			//		}
-			//    },
-			//    success: function(html) {
-			//    	if(html.length > 0){
-			//    		$('#error_msg').hide();
-			//    		$('#error_msg').html(html);
-			//    		$('#error_msg').show();
-			//    	}else{
-			//			    		location.href="/home/go";
-			//    	}
-			//    }
-			//});
-			//-->
 		</script></div>
 	<div id="OSC_Footer">© 赛斯特(WWW.SYSIT.ORG)</div>
 </div>
