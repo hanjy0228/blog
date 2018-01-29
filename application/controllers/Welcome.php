@@ -183,7 +183,6 @@ class Welcome extends CI_Controller {
 				}
 			}
 		}
-		
 	}
 	public function blog_comments(){
 		$user=$this->session->userdata('user');
